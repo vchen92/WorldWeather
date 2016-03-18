@@ -17,6 +17,7 @@ public class RemoteFetchWeather {
     public static JSONObject getJSON(Context context, String city){
         try {
             URL url = new URL(String.format(OPEN_WEATHER_MAP_API, city));
+
             HttpURLConnection connection =
                     (HttpURLConnection)url.openConnection();
 

@@ -54,7 +54,7 @@ public class WeatherFragment extends Fragment {
         updateWeatherData(WeatherActivity.getCity());
     }
 
-
+    //Calls to fetch data for desired city
     private void updateWeatherData(final String city){
         new Thread(){
             public void run(){
@@ -78,6 +78,7 @@ public class WeatherFragment extends Fragment {
         }.start();
     }
 
+    //Fetch desired data from JSON of OpenWeatherMap API
     private void renderWeather(JSONObject json){
         try {
             cityField.setText(json.getString("name").toUpperCase(Locale.US) +
@@ -107,6 +108,7 @@ public class WeatherFragment extends Fragment {
         }
     }
 
+    //Sets the icon in relations to the current weather
     private void setWeatherIcon(int actualId, long sunrise, long sunset){
         int id = actualId / 100;
         String icon = "";
@@ -136,6 +138,7 @@ public class WeatherFragment extends Fragment {
         weatherIcon.setText(icon);
     }
 
+    //Call to change focus city
     public void changeCity(String city){
         updateWeatherData(city);
     }

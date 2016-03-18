@@ -36,7 +36,9 @@ public class WeatherActivity extends AppCompatActivity {
                     .commit();
         }
 
-        //Get and set location from Maps
+        //Get location from MapsActivity
+        //Set location to focus city
+        //Vancouver as default city
         Bundle mapData = getIntent().getExtras();
         if(mapData == null){
             setCity("Vancouver");
@@ -71,6 +73,7 @@ public class WeatherActivity extends AppCompatActivity {
 
     }
 
+    //Dialog to ask user for focus city
     private void
     showInputDialog(){
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -88,6 +91,7 @@ public class WeatherActivity extends AppCompatActivity {
         builder.show();
     }
 
+    //Change focus city
     public void changeCity(String city){
         setCity(city);
         WeatherFragment wf = (WeatherFragment)getSupportFragmentManager()

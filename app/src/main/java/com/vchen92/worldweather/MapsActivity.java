@@ -28,10 +28,12 @@ public class MapsActivity extends AppCompatActivity {
 
     private static String city;
 
+    //Set the focus city
     public static void setCity(String city) {
         MapsActivity.city = city;
     }
 
+    //Get current focused city
     public static String getCity() {
         if (city == null) {
             return "Unknown";
@@ -45,7 +47,9 @@ public class MapsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_maps);
         setUpMapIfNeeded();
 
-        //Get and set location from WeatherActivity
+        //Get location from WeatherActivity
+        //Set to current city
+        //Vancouver as default city
         Bundle weatherData = getIntent().getExtras();
         if (weatherData == null) {
             changeCity("vancouver");
@@ -77,7 +81,6 @@ public class MapsActivity extends AppCompatActivity {
             showInputDialog();
         }
         return false;
-
     }
 
     @Override
@@ -86,7 +89,7 @@ public class MapsActivity extends AppCompatActivity {
         setUpMapIfNeeded();
     }
 
-    //Changes the type of the map
+    //Changes the map type (normal or satellite)
     public void changeType(View view) {
         if (mMap.getMapType() == GoogleMap.MAP_TYPE_NORMAL) {
             mMap.setMapType(GoogleMap.MAP_TYPE_SATELLITE);
@@ -125,7 +128,7 @@ public class MapsActivity extends AppCompatActivity {
         });
     }
 
-    //Dialog for user input of location change
+    //Dialog for user input of desired city
     private void
     showInputDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -162,6 +165,9 @@ public class MapsActivity extends AppCompatActivity {
         }
     }
 
+    //Convert geo-coordinates of marker to closest locality
+    //Set locality to focused city
+    //Use locality for marker title
     public void revGeoCode(LatLng point) {
         double lat = point.latitude;
         double lng = point.longitude;
@@ -181,7 +187,7 @@ public class MapsActivity extends AppCompatActivity {
         createMarker(point);
     }
 
-
+    //Create a marker on given latlng position
     public void createMarker(LatLng latLng) {
         mMap.clear();
 
